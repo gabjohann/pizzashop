@@ -28,8 +28,8 @@ const data = [
 
 export function RevenueChart() {
   return (
-    <Card className="col-span-6">
-      <CardHeader className="flex-row items-center justify-between">
+    <Card className="col-span-6 bg-background">
+      <CardHeader className="flex-row items-center justify-between pb-8">
         <div className="space-y-1">
           <CardTitle className="text-base font-medium">
             Receita no período
@@ -47,7 +47,8 @@ export function RevenueChart() {
               stroke="#888"
               axisLine={false}
               tickLine={false}
-              width={80}
+              tickMargin={9}
+              width={90}
               tickFormatter={(value: number) =>
                 value.toLocaleString('pt-BR', {
                   style: 'currency',
@@ -56,7 +57,7 @@ export function RevenueChart() {
               }
             />
 
-            <CartesianGrid vertical={false} className="" />
+            <CartesianGrid vertical={false} className="stroke-muted" />
 
             <Line
               type="linear"
