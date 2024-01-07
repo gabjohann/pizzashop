@@ -3,7 +3,6 @@ import {
   Line,
   LineChart,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts'
@@ -58,14 +57,13 @@ export function RevenueChart() {
             />
 
             <CartesianGrid vertical={false} className="" />
-            
+
             <Line
               type="linear"
               strokeWidth={2}
               dataKey="revenue"
               stroke={colors.violet['500']}
             />
-
           </LineChart>
         </ResponsiveContainer>
       </CardContent>
