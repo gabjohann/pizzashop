@@ -5,7 +5,7 @@ interface GetManagedRestaurant {
   name: string
   createdAt: Date | null
   updatedAt: Date | null
-  description: Date | null
+  description: string | null
   managerId: string | null
 }
 
