@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
-import { Utensils } from 'lucide-react'
+import { DollarSign } from 'lucide-react'
 
-import { getDayOrdersAmount } from '@/api/get-day-orders-amount'
+import { getMonthRevenue } from '@/api/get-month-revenue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-export function DayOrdersAmountCard() {
-  const { data: dayOrdersAmount } = useQuery({
-    queryFn: getDayOrdersAmount,
-    queryKey: ['metrics', 'day-orders-amount'],
+export function MonthRevenueCard() {
+  const { data: monthRevenue } = useQuery({
+    queryFn: getMonthRevenue,
+    queryKey: ['metrics', 'month-revenue'],
   })
 
   return (
@@ -17,30 +17,33 @@ export function DayOrdersAmountCard() {
           Receita total (mês)
         </CardTitle>
 
-        <Utensils className="h-4 w-4 text-muted-foreground" />
+        <DollarSign className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
 
       <CardContent className="space-y-1">
-        {dayOrdersAmount && (
+        {monthRevenue && (
           <>
             <span className="text-2xl font-bold tracking-tight">
-              {dayOrdersAmount.amount.toLocaleString('pt-BR')}
+              {monthRevenue.receipt.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
             </span>
 
             <p className="text-xs text-muted-foreground">
-              {dayOrdersAmount.diffFromYesterday >= 0 ? (
+              {monthRevenue.diffFromLastMonth >= 0 ? (
                 <>
                   <span className="text-emerald-500 dark:text-emerald-400">
-                    +{dayOrdersAmount.diffFromYesterday}%
+                    +{monthRevenue.diffFromLastMonth}%
                   </span>{' '}
-                  em relação a ontem
+                  em relação ao mês passado
                 </>
               ) : (
                 <>
                   <span className="text-rose-500 dark:text-rose-400">
-                    {dayOrdersAmount.diffFromYesterday}%
+                    {monthRevenue.diffFromLastMonth}%
                   </span>{' '}
-                  em relação a ontem
+                  em relação ao mês passado
                 </>
               )}
             </p>
